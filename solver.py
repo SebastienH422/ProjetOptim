@@ -2,6 +2,7 @@ import argparse
 from pCP1 import VersionClassique
 from pCP2 import VersionRayon_1
 from pCP3 import VersionRayon_2
+from data import PCentreData
 
 def choisir_version(version, data):
     if version == 1:

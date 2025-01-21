@@ -14,6 +14,9 @@ class VersionClassique(ModelesPCentre):
         # Modèle
         modele = pe.ConcreteModel(name = f'pCP1 Version classique {self.name_model}')
 
+        # Fonction objectif
+        modele.obj = pe.Objective(expr = modele.D)
+
         # Variables
         modele.x = pe.Var(range(self.data.nb_client), range(self.data.nb_client), name = 'x', domain = pe.Binary)
         modele.y = pe.Var(range(self.data.nb_client), name = 'y', domain = pe.Binary)

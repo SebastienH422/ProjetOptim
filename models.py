@@ -1,11 +1,15 @@
-import pyomo.environ as pyo
+import pyomo.environ as pe
+from data import PCentreData
 
 class ModelesPCentre:
-    def __init__(self, data):
+    def __init__(self, path_data, path_model, name_model):
         """
         Initialise le modèle avec les données.
         """
-        self.data = data
+        self.data = PCentreData(path_data)
+        self.path_model = path_model
+        self.name_model = name_model
+
         self.solution = None
         self.modele = None
 
@@ -21,23 +25,23 @@ class ModelesPCentre:
         """
         raise NotImplementedError
 
-    def ecrire_modele(self, fichier_lp):
+    def ecrire_modele(self):
         """
         Sauvegarde le modèle dans un fichier LP.
         """
-        self.modele.write(fichier_lp)
+        self.modele.write(self.path_model)
 
     def lancer(self, temps_limite):
         """
         Résout le modèle avec un solveur.
         """
-        solver = pyo.SolverFactory("highs")  
+        solver = pe.SolverFactory("highs")  
         solver.options["time_limit"] = temps_limite  # Appliquer la limite de temps
         
         resultat = solver.solve(self.modele, tee=True)
 
-        if (resultat.solver.status == pyo.SolverStatus.ok) and \
-           (resultat.solver.termination_condition == pyo.TerminationCondition.optimal):
+        if (resultat.solver.status == pe.SolverStatus.ok) and \
+           (resultat.solver.termination_condition == pe.TerminationCondition.optimal):
             print("Solution optimale trouvée.")
             self.extraire_solution()
         else:

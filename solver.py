@@ -4,7 +4,7 @@ import pyomo.environ as pe
 from pCP1 import VersionClassique
 from pCP2 import VersionRayon_1
 from pCP3 import VersionRayon_2
-from data import PCentreData 
+from solution import PCentreSolution
 
 
 def choisir_version(version, path_data, path_model, name_model):
@@ -37,13 +37,13 @@ if __name__ == "__main__":
     solver = po.SolverFactory('appsi_highs')
     solver.options['time_limit'] = args.tempsLimite
 
-    results = solver.solve(modele, tee = False, load_solutions = False)
+    results = solver.solve(modele.modele, tee = False, load_solutions = False)
 
     name_solution = ''
 
     if results.solver.status != po.SolverStatus.ok:
         text_solution = ''.join([''.join(['-1' for _ in range(args.nbPoints)]) for _ in range(2) + '\n']) + '-1'
     else:
-        # text_solution = ''.join([pe.value(modele.x[i,j]) for val in ])
+        print(type(pe.value(modele.modele.x)), pe.value(modele.modele.x))
     
 

@@ -32,18 +32,25 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     path_instance = f'{args.cheminVersInstance}/n{args.nbPoints}p{args.nbAouvrir}i{args.indiceInstance}'
-
-    modele = choisir_version(args.version, path_instance, args.cheminModelLp, args.indiceInstance)
+    
+    modele_inst = choisir_version(args.version, path_instance, args.cheminModelLp, args.indiceInstance)
+    
     solver = po.SolverFactory('appsi_highs')
     solver.options['time_limit'] = args.tempsLimite
 
-    results = solver.solve(modele.modele, tee = False, load_solutions = False)
+    results = solver.solve(modele_inst.modele, tee = False, load_solutions = False)
 
     name_solution = ''
 
     if results.solver.status != po.SolverStatus.ok:
         text_solution = ''.join([''.join(['-1' for _ in range(args.nbPoints)]) for _ in range(2) + '\n']) + '-1'
     else:
-        print(type(pe.value(modele.modele.x)), pe.value(modele.modele.x))
+        print(results.solver.termination_condition)
+        for i in range(3):
+            print(f'y[{i}] = ', results.solution.variable[modele_inst.modele.y[i].getname()]['Value'])
+            for j in range(3):
+                print(f'x[{i}, {j}] = ', results.solution.variable[modele_inst.modele.x[i,j].getname()]['Value'])
+
+        print(results.problem.lower_bound)
     
 

@@ -30,7 +30,7 @@ class PCentreData:
                 self.demandes.append(qj)
         
 
-    def afficher_donnees(self):
+    def afficher_donnees(self): # Affichage des données
         """ Affiche les données pour vérifier leur extraction. """
         print(f"Nombre de noeuds: {self.nb_points}, Nombre d'installations à ouvrir: {self.nb_ouvrir}")
         print("Coordonnées des noeuds:", self.coordonnees)

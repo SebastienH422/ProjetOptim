@@ -1,16 +1,18 @@
 import argparse
+import pyomo.opt as po
 from pCP1 import VersionClassique
 from pCP2 import VersionRayon_1
 from pCP3 import VersionRayon_2
-from data import PCentreData
+from data import PCentreData 
 
-def choisir_version(version, data):
+
+def choisir_version(version, path_data, path_model):
     if version == 1:
-        return VersionClassique(data)
+        return VersionClassique(path_data, path_model)
     elif version == 2:
-        return VersionRayon_1(data)
+        return VersionRayon_1(path_data, path_model)
     elif version == 3:
-        return VersionRayon_2(data)
+        return VersionRayon_2(path_data, path_model)
     else:
         raise ValueError("Version invalide")
 
@@ -28,9 +30,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    data = PCentreData(args.cheminVersInstance)
-    modele = choisir_version(args.version, data)
-    modele.creer_modele(capacite=args.avecCapacite)
-    modele.lancer(args.tempsLimite)
-    modele.ecrire_modele(args.cheminModelLp)
-    modele.solution.ecrire_solution(args.cheminSolution)
+    modele = choisir_version(args.version, args.cheminVersInstance, args.cheminModelLp)
+    solver = po.SolverFactory('appsi_highs')
+    solver.options['time_limit'] = args.tempsLimite
+    solver.options[]

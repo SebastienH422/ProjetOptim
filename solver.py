@@ -1,18 +1,19 @@
 import argparse
 import pyomo.opt as po
+import pyomo.environ as pe
 from pCP1 import VersionClassique
 from pCP2 import VersionRayon_1
 from pCP3 import VersionRayon_2
 from data import PCentreData 
 
 
-def choisir_version(version, path_data, path_model):
+def choisir_version(version, path_data, path_model, name_model):
     if version == 1:
-        return VersionClassique(path_data, path_model)
+        return VersionClassique(path_data, path_model, name_model)
     elif version == 2:
-        return VersionRayon_1(path_data, path_model)
+        return VersionRayon_1(path_data, path_model, name_model)
     elif version == 3:
-        return VersionRayon_2(path_data, path_model)
+        return VersionRayon_2(path_data, path_model, name_model)
     else:
         raise ValueError("Version invalide")
 
@@ -30,7 +31,19 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    modele = choisir_version(args.version, args.cheminVersInstance, args.cheminModelLp)
+    path_instance = f'{args.cheminVersInstance}/n{args.nbPoints}p{args.nbAouvrir}i{args.indiceInstance}'
+
+    modele = choisir_version(args.version, path_instance, args.cheminModelLp, args.indiceInstance)
     solver = po.SolverFactory('appsi_highs')
     solver.options['time_limit'] = args.tempsLimite
-    solver.options[]
+
+    results = solver.solve(modele, tee = False, load_solutions = False)
+
+    name_solution = ''
+
+    if results.solver.status != po.SolverStatus.ok:
+        text_solution = ''.join([''.join(['-1' for _ in range(args.nbPoints)]) for _ in range(2) + '\n']) + '-1'
+    else:
+        # text_solution = ''.join([pe.value(modele.x[i,j]) for val in ])
+    
+

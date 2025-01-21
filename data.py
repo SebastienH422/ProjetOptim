@@ -1,3 +1,4 @@
+import math
 class PCentreData:
     def __init__(self, fichier_donnees: str):
         """
@@ -27,6 +28,7 @@ class PCentreData:
                 self.coordonnees.append((x, y))
                 self.capacites.append(qi)
                 self.demandes.append(qj)
+        
 
     def afficher_donnees(self):
         """ Affiche les données pour vérifier leur extraction. """
@@ -34,6 +36,26 @@ class PCentreData:
         print("Coordonnées des noeuds:", self.coordonnees)
         print("Capacités des installations:", self.capacites)
         print("Demandes des clients:", self.demandes)
+        
+        print("Matrice des distances:")
+        distances = self.calculer_matrice_distances()
+        for ligne in distances:
+            print(ligne)
+        
+    def calculer_matrice_distances(self):
+        """ Calcule la matrice des distances entre les points. """
+        distances = []
+        for i in range(self.nb_points):
+            ligne = []
+            for j in range(self.nb_points):
+                dist = self.distance_euclidienne(self.coordonnees[i], self.coordonnees[j])
+                ligne.append(dist)
+            distances.append(ligne)
+        return distances
+
+    def distance_euclidienne(self, point1, point2):
+        """ Calcule la distance euclidienne entre deux points. """
+        return math.sqrt((point1[0] - point2[0]) ** 2 + (point1[1] - point2[1]) ** 2)
 
 
 data = PCentreData("data/n3p1i1")

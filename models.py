@@ -2,13 +2,15 @@ import pyomo.environ as pe
 from data import PCentreData
 
 class ModelesPCentre:
-    def __init__(self, path_instance, path_model, name_model):
+    
+    def __init__(self, path_instance, path_model, name_model, capacity):
         """
         Initialise le modèle avec les données.
         """
         self.data = PCentreData(path_instance)
         self.path_model = path_model
         self.name_model = name_model
+        self.capacity = capacity
 
         self.solution = None
         self.modele = None

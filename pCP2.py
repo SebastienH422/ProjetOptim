@@ -27,16 +27,16 @@ class VersionRayon_1(ModelesPCentre):
 
             # Constraintes
             modele.c1 = pe.Constraint(expr = quicksum([modele.y[i] for i in range(self.data.nb_points)]) <= self.data.p)
-
-            modele.c2 = pe.ConstraintList()
-            for j in range(self.data.nb_clients):
-                modele.c2.add(quicksum(modele.x[i, j] for i in range(self.data.nb_points)) == 1)
                 
-            modele.c3 = pe.ConstraintList()
+            modele.c2 = pe.ConstraintList()
             for i in range(self.data.nb_clients):
                 for j in range(self.data.nb_points):
-                    modele.c3.add(modele.x[i, j] * self.data.d[i, j] <= quicksum([(self.data.Dk[k] - self.data.Dk[k-1])
+                    modele.c2.add(modele.x[i, j] * self.data.d[i, j] <= quicksum([(self.data.Dk[k] - self.data.Dk[k-1])
                                                     * modele.z[k] for k in range(1, len(self.data.Dk))]) + self.data.Dk[0])
+                    
+            modele.c3 = pe.ConstraintList()
+            for j in range(self.data.nb_clients):
+                modele.c3.add(quicksum(modele.x[i, j] for i in range(self.data.nb_points)) == 1)
 
             Q = self.data.capacites[i]
             q = self.data.demandes[j]
@@ -58,19 +58,13 @@ class VersionRayon_1(ModelesPCentre):
                                                     * modele.z[k] for k in range(1, len(self.data.Dk))]) + self.data.Dk[0])         
 
             # Contraintes
-            modele.c1 = pe.ConstraintList()
+            modele.c1 = pe.Constraint(quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
+
+            modele.c2 = pe.ConstraintList()
             for j in range(self.data.nb_clients):
                 for k, val_Dk in enumerate(self.data.Dk):
                     modele.c1.add(1 - modele.z[k] <= quicksum([modele.y[i] if self.data.d[i,j] < val_Dk 
                                                             else 0 for i in range(self.data.nb_clients)]))
             
-            modele.c2 = pe.Constraint(quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
             
-
         self.modele = modele
-
-    def extraire_solution(self):
-        """
-        Extrait la solution du modèle résolu.
-        """
-        pass  # Extraction des valeurs optimales

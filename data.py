@@ -1,12 +1,11 @@
-
 import numpy as np
 
 class PCentreData:
-    def __init__(self, fichier_donnees: str):
+    def __init__(self, path_instance: str):
         """
         Initialise les données du problème à partir d'un fichier.
         """
-        self.fichier_donnees = fichier_donnees
+        self.path_instance = path_instance
         self.nb_clients = None
         self.p = None
         self.coordonnees_clients = [] 
@@ -16,18 +15,19 @@ class PCentreData:
         self.d = None # Matrice des distances
         self.Dk = []
 
-        self.start()
+        self.start(path_instance = path_instance)
 
-    def start(self):
-        self.lire_donnees()
+    def start(self, path_instance : str):
+        self.lire_donnees(path_instance = path_instance)
+
         self.calcul_dists()
         self.Deca()
 
-    def lire_donnees(self):
+    def lire_donnees(self, path_instance : str):
         """
         Lit les données depuis un fichier et les stocke dans les attributs de la classe.
         """
-        with open(self.fichier_donnees, "r") as f:
+        with open(path_instance, "r") as f:
             ligne = f.readline().strip().split()
             self.nb_clients = int(ligne[0])
             self.p = int(ligne[1])
@@ -52,12 +52,16 @@ class PCentreData:
 
 
     def calcul_dists(self):
+        """
+        Calcule les distances entre les points clients.
+        """
         
-        # conversion des deux listes en tab numpy
+        # Conversion des deux listes en vecteurs numpy
         clients = np.array(self.coordonnees_clients)
         installations = np.array(self.coordonnees_installations)
 
-        #matrice 
+        # Matrice numpy
+
         n = len(clients)
         self.d = np.zeros((n,n))
 
@@ -66,21 +70,12 @@ class PCentreData:
                 diff = clients[i] - installations[j]
                 self.d[i][j] = np.sqrt(np.sum(diff**2))
 
-    def Deca(self): # calcul des D^k
+
+    def Deca(self):
+        """
+        Calcule les rayons D^k
+        """
         for i in range(self.nb_clients):
             for j in range(self.nb_clients):
                 if self.d[i][j] not in self.Dk: 
                     self.Dk.append(self.d[i][j])
-
-
-
-data = PCentreData("Instances/n3p1i1")
-
-print(len(data.coordonnees_clients))
-print(data.d)
-print("Dk : ", data.Dk)
-
-            
-
-
-    

@@ -1,23 +1,15 @@
 # ProjetOptim
 
-## Vrac
-### Début rapport
-- On doit faire un min max des dij utilisés, donc créer une variable représentant le max des dij utilisé
-- On a la formule du cours 3.C minimum entre deux valeurs. Il faut adapter la formule au cas max, et au cas avec beaucoup d'indices (la formule du cours utilise deux indices)
-- On doit faire en sorte que les contraintes découlant du max entre les dij soient compatibles avec les autres contraintes du problème.
+## Appel à solver.py
+> python solver.py -v 1 -c 0 -d Instances -t 100 -n 3 -p 1 -i 1 -s Solutions -m Modeles
+- `v` version (1, 2, 3)
+- `c` avec ou sans capacités (0: sans; 1: avec)
+- `d` chemin vers le dossier contenant les fichiers instances (ne pas modifier)
+- `t` temps d'exécution max en secondes (1 < `t`)
+- `n` nombre de noeuds dans le graphe (voir les noms d'instances dans le dossier Instances)
+- `p` nombre d'entrepôt à construire (voir les noms d'instances dans le dossier Instances)
+- `i` indice de l'instance (voir les noms d'instances dans le dossier Instances)
+- `s` chemin vers le dossier contenant les fichiers solutions (ne pas modifier)
+- `m` chemin vers le dossier contenant les fichiers modèles (ne pas modifier)
 
-### Première reformulation du max des variables
-On renumérote $E = {(i,j)}$ par $E = {1, ..., K}$. On définit les variables $B_i$ pour $i \in E$ par
-$B_i = max(B_{i+1}, x_i)\\
-B_k = x_k$
-
-Ainsi, on cherche à minimiser 
-$$
-\begin{array}
-  B_1 &= max(x_1, B_2)\\
-      &= max(x_1, max(x_2, B_3))\\
-      &= max(x_1, max(x_2, max(x_3, B_4)))\\
-      &= ...\\
-      &= max(x_1, ..., x_K)
-\end{array}
-$$
+## Appel à checker.py

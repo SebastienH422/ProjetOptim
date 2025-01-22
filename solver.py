@@ -1,11 +1,10 @@
 import argparse
 import pyomo.opt as po
 import pyomo.environ as pe
-from pCP1 import VersionClassique
+from pCP1 import VersionClassique 
 from pCP2 import VersionRayon_1
 from pCP3 import VersionRayon_2
 from solution import PCentreSolution
-
 
 def choisir_version(version, path_data, path_model, name_instance, capacity):
     if version == 1:
@@ -65,6 +64,3 @@ if __name__ == "__main__":
                 solution.assignations[j] = -1
                 
     solution.ecrire_solution(path_solution = path_solution)    
-
-    
-

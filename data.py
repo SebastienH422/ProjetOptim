@@ -1,62 +1,78 @@
-import math
+import numpy as np
+
 class PCentreData:
-    def __init__(self, fichier_donnees: str):
+    def __init__(self, path_instance: str):
         """
         Initialise les données du problème à partir d'un fichier.
         """
-        self.fichier_donnees = fichier_donnees
-        self.nb_points = 0
-        self.nb_ouvrir = 0
-        self.coordonnees = []
-        self.capacites = []
-        self.demandes = []
+        self.path_instance = path_instance
+        self.nb_clients = None
+        self.p = None
+        self.coordonnees_clients = [] 
+        self.coordonnees_installations = []
+        self.Q = []
+        self.q = [] 
+        self.d = None # Matrice des distances
+        self.Dk = []
 
-        self.lire_donnees()
+        self.start(path_instance = path_instance)
 
-    def lire_donnees(self):
+    def start(self, path_instance : str):
+        self.lire_donnees(path_instance = path_instance)
+        self.calcul_dists()
+        self.Deca()
+
+    def lire_donnees(self, path_instance : str):
         """
         Lit les données depuis un fichier et les stocke dans les attributs de la classe.
         """
-        with open(self.fichier_donnees, "r") as f:
+        with open(path_instance, "r") as f:
             ligne = f.readline().strip().split()
-            self.nb_points = int(ligne[0])
-            self.nb_ouvrir = int(ligne[1])
+            self.nb_clients = int(ligne[0])
+            self.p = int(ligne[1])
             for ligne in f:
                 valeurs = list(map(int, ligne.strip().split()))
                 x, y, qi, qj = valeurs
                 
-                self.coordonnees.append((x, y))
-                self.capacites.append(qi)
-                self.demandes.append(qj)
-        
+                self.coordonnees_clients.append((x, y))    #coordonées 
+                self.coordonnees_installations.append((x, y))
+                
+                self.Q.append(qi)    #Calcul 
+                self.q.append(qj)   
 
-    def afficher_donnees(self): # Affichage des données
+    def afficher_donnees(self):
         """ Affiche les données pour vérifier leur extraction. """
-        print(f"Nombre de noeuds: {self.nb_points}, Nombre d'installations à ouvrir: {self.nb_ouvrir}")
-        print("Coordonnées des noeuds:", self.coordonnees)
-        print("Capacités des installations:", self.capacites)
-        print("Demandes des clients:", self.demandes)
+        print(f"Nombre de noeuds: {self.nb_clients}, Nombre d'installations à ouvrir: {self.p}")
+        print("Coordonnées des clients:", self.coordonnees_clients, "\n", "Coordonées des installations: ", self.coordonnees_installations)
+        print("Capacités des installations:", self.Q)
+        print("Demandes des clients:", self.q)
+        print("Matrice des distances :", self.d)
         
-        print("Matrice des distances:")
-        distances = self.calculer_matrice_distances()
-        for ligne in distances:
-            print(ligne)
+
+
+    def calcul_dists(self):
+        """
+        Calcule les distances entre les points clients.
+        """
         
-    def calculer_matrice_distances(self):
-        """ Calcule la matrice des distances entre les points. """
-        distances = []
-        for i in range(self.nb_points):
-            ligne = []
-            for j in range(self.nb_points):
-                dist = self.distance_euclidienne(self.coordonnees[i], self.coordonnees[j])
-                ligne.append(dist)
-            distances.append(ligne)
-        return distances
+        # Conversion des deux listes en vecteurs numpy
+        clients = np.array(self.coordonnees_clients)
+        installations = np.array(self.coordonnees_installations)
 
-    def distance_euclidienne(self, point1, point2):
-        """ Calcule la distance euclidienne entre deux points. """
-        return math.sqrt((point1[0] - point2[0]) ** 2 + (point1[1] - point2[1]) ** 2)
+        # Matrice numpy
+        n = len(clients)
+        self.d = np.zeros((n,n))
 
+        for i in range(n):
+            for j in range(n):
+                diff = clients[i] - installations[j]
+                self.d[i][j] = np.sqrt(np.sum(diff**2))
 
-data = PCentreData("data/n3p1i1")
-data.afficher_donnees()
+    def Deca(self):
+        """
+        Calcule les rayons D^k
+        """
+        for i in range(self.nb_clients):
+            for j in range(self.nb_clients):
+                if self.d[i][j] not in self.Dk: 
+                    self.Dk.append(self.d[i][j])

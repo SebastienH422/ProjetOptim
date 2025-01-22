@@ -12,6 +12,7 @@ class ModelesPCentre:
 
         self.solution = None
         self.modele = None
+        self.statut = False
 
     def creer_modele(self, capacite):
         """

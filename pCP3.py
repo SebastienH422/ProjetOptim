@@ -44,7 +44,6 @@ class VersionRayon_2(ModelesPCentre):
                 modele.c4.add(quicksum(self.data.q[j] * modele.x[i,j] for j in range(self.data.nb_clients)) <= self.data.Q[i] * modele.y[i])
         
         else :
-
             modele.c2 = pe.ConstraintList()
             for j in range(self.data.nb_clients): 
                 for k in range(self.data.Dk):
@@ -53,10 +52,3 @@ class VersionRayon_2(ModelesPCentre):
             modele.c3 = pe.Constraint(quicksum([modele.u[k] for k in range(self.data.Dk)]) == 1)
 
         self.modele = modele
-
-    def extraire_solution(self):
-        """
-        Extrait la solution du modèle résolu.
-        """
-        pass  # Extraction des valeurs optimales
-

@@ -2,19 +2,51 @@ from models import ModelesPCentre
 import pyomo.environ as pe
 from pyomo.core import quicksum
 
-class VersionClassique(ModelesPCentre): 
+class VersionRayon_1(ModelesPCentre): 
 
-    def __init__(self, path_data, path_model, name_model, capacite):
-        super().__init__(path_data, path_model, name_model)
-        self.capacite = capacite
+    def __init__(self, path_data, path_model, name_model, capacity):
+        super().__init__(path_data, path_model, name_model, capacity)
+        self.creer_modele()
 
     def creer_modele(self):
         """
         Implémente la version classique du problème.
         """
-        if self.capacite == 0:
+        if self.capacity:
             # Modèle
-            modele = pe.ConcreteModel(name = f'pCP2 Version sans capacité {self.name_model}')
+            modele = pe.ConcreteModel(name = f'pCP2 avec capacité')
+
+            # Variables
+            modele.x = pe.Var(range(self.data.nb_points), range(self.data.nb_clients), name = 'x', domain=pe.Binary)
+            modele.y = pe.Var(range(self.data.nb_points), name ='y', domain=pe.Binary)
+            modele.z = pe.Var(range(len(self.data.Dk)), name ='z', domain=pe.Binary)
+
+            # Objective function
+            modele.obj = pe.Objective(expr = quicksum([(self.data.Dk[k] - self.data.Dk[k-1]) 
+                                                    * modele.z[k] for k in range(1, len(self.data.Dk))]) + self.data.Dk[0])
+
+            # Constraintes
+            modele.c1 = pe.Constraint(expr = quicksum([modele.y[i] for i in range(self.data.nb_points)]) <= self.data.p)
+
+            modele.c2 = pe.ConstraintList()
+            for j in range(self.data.nb_clients):
+                modele.c2.add(quicksum(modele.x[i, j] for i in range(self.data.nb_points)) == 1)
+                
+            modele.c3 = pe.ConstraintList()
+            for i in range(self.data.nb_clients):
+                for j in range(self.data.nb_points):
+                    modele.c3.add(modele.x[i, j] * self.data.d[i, j] <= quicksum([(self.data.Dk[k] - self.data.Dk[k-1])
+                                                    * modele.z[k] for k in range(1, len(self.data.Dk))]) + self.data.Dk[0])
+
+            Q = self.data.capacites[i]
+            q = self.data.demandes[j]
+            
+            modele.c4 = pe.ConstraintList()
+            for i in range(self.data.nb_points):
+                modele.c4.add(quicksum([q[j] * modele.x[i, j] for j in range(self.data.nb_clients)]) <= Q[i] * modele.y[i])
+        else:
+            # Modèle
+            modele = pe.ConcreteModel(name = f'pCP2 sans capacité {self.name_model}')
 
             # Variables
             modele.z = pe.Var(range(len(self.data.Dk)), name = 'z', domain = pe.Binary)
@@ -29,46 +61,10 @@ class VersionClassique(ModelesPCentre):
             modele.c1 = pe.ConstraintList()
             for j in range(self.data.nb_clients):
                 for k, val_Dk in enumerate(self.data.Dk):
-                    modele.c1.add(1-modele.z[k] <= quicksum([modele.y[i] if self.data.d[i,j] < val_Dk 
+                    modele.c1.add(1 - modele.z[k] <= quicksum([modele.y[i] if self.data.d[i,j] < val_Dk 
                                                             else 0 for i in range(self.data.nb_clients)]))
             
-            modele.c2 = pe.ConstraintList()
-            modele.c2.add(quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
-            
-        elif self.capacite == 1:
-            # Modèle
-            modele = pe.ConcreteModel(name=f'pCP2 Version avec capacité')
-
-            # Variables
-            modele.z = pe.Var(range(len(self.data.Dk)), name='z', domain=pe.Binary)
-            modele.y = pe.Var(range(self.data.nb_points), name='y', domain=pe.Binary)
-            modele.x = pe.Var(range(self.data.nb_points), range(self.data.nb_clients), name='x', domain=pe.Binary)
-            modele.D = pe.Var(name='D', domain=pe.NonNegativeReals)
-
-            # Objective function
-            modele.obj = pe.Objective(expr = quicksum([(self.data.Dk[k] - self.data.Dk[k-1]) 
-                                                    * modele.z[k] for k in range(1, len(self.data.Dk))]) + self.data.Dk[0])
-
-            # Constraintes
-            modele.c1 = pe.Constraint(expr=quicksum([modele.y[i] for i in range(self.data.nb_points)]) <= self.data.p)
-
-            modele.c2 = pe.ConstraintList()
-            for j in range(self.data.nb_clients):
-                modele.c2.add(sum(modele.x[i, j] for i in range(self.data.nb_points)) == 1)
-                
-            modele.c3 = pe.ConstraintList()
-            for i in range(self.data.nb_clients):
-                for j in range(self.data.nb_points):
-                    modele.c3.add(modele.x[i, j] * self.data.d[i, j] <= quicksum([(self.data.Dk[k] - self.data.Dk[k-1])
-                                                    * modele.z[k] for k in range(1, len(self.data.Dk))]) + self.data.Dk[0])
-
-            Q = {i: self.data.capacites[i] for i in range(self.data.nb_points)}
-            q = {j: self.data.demandes[j] for j in range(self.data.nb_clients)}
-            
-            modele.c4 = pe.ConstraintList()
-            for i in range(self.data.nb_points):
-                modele.c4.add(sum(q[j] * modele.x[i, j] for j in range(self.data.nb_clients)) <= Q[i] * modele.y[i])
-
+            modele.c2 = pe.Constraint(quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
             
         self.modele = modele
 

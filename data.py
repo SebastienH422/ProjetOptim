@@ -19,7 +19,6 @@ class PCentreData:
 
     def start(self, path_instance : str):
         self.lire_donnees(path_instance = path_instance)
-
         self.calcul_dists()
         self.Deca()
 
@@ -28,18 +27,17 @@ class PCentreData:
         Lit les données depuis un fichier et les stocke dans les attributs de la classe.
         """
         with open(path_instance, "r") as f:
-            ligne = f.readline().strip().split()
+            ligne = f.readline().split()
             self.nb_clients = int(ligne[0])
             self.p = int(ligne[1])
-            for ligne in f:
-                valeurs = list(map(int, ligne.strip().split()))
-                x, y, qi, qj = valeurs
+            for ligne in f: 
+                x, y, qi, qj = list(map(int, ligne.split()))
                 
-                self.coordonnees_clients.append((x, y))    #coordonées 
+                self.coordonnees_clients.append((x, y)) # Coordonnées 
                 self.coordonnees_installations.append((x, y))
                 
-                self.Q.append(qi)    #Calcul 
-                self.q.append(qj)   
+                self.Q.append(qi) # Capacités
+                self.q.append(qj) # Demandes
 
     def afficher_donnees(self):
         """ Affiche les données pour vérifier leur extraction. """
@@ -61,7 +59,6 @@ class PCentreData:
         installations = np.array(self.coordonnees_installations)
 
         # Matrice numpy
-
         n = len(clients)
         self.d = np.zeros((n,n))
 
@@ -69,7 +66,6 @@ class PCentreData:
             for j in range(n):
                 diff = clients[i] - installations[j]
                 self.d[i][j] = np.sqrt(np.sum(diff**2))
-
 
     def Deca(self):
         """

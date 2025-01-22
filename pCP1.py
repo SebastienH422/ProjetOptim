@@ -4,10 +4,9 @@ from pyomo.core import quicksum
 
 class VersionClassique(ModelesPCentre): 
 
-    def __init__(self, path_data, path_model, name_model):
-        super().__init__(path_data, path_model, name_model)
-        self.creer_modele(0)
-        self.capacite = capcite
+    def __init__(self, path_data, path_model, name_model, capacity):
+        super().__init__(path_data, path_model, name_model, capacity)
+        self.creer_modele()
 
     def creer_modele(self):
         """
@@ -34,22 +33,20 @@ class VersionClassique(ModelesPCentre):
         for j in range(self.data.nb_clients):
             modele.c2.add(quicksum([modele.x[i,j] for i in range(self.data.nb_clients)]) == 1)
         
-        modele.c3 = pe.ConstraintList()
-        for i in range(self.data.nb_clients):
-            for j in range(self.data.nb_clients):
-                modele.c3.add(modele.x[i,j] <= modele.y[i])
-        
-        modele.c4 = pe.Constraint(expr = quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
+        modele.c3 = pe.Constraint(expr = quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
 
-        if self.capacite == 1:
-            #modele.Q = pe.Param(range(self.data.nb_points), name = 'Q', initialize = self.data.capacites, domain = pe.NonNegativeReals)
-            #modele.q = pe.Param(range(self.data.nb_clients), name = 'q', initialize = self.data.demandes, domain = pe.NonNegativeReals)
-            Q = {i: self.data.capacites[i] for i in range(self.data.nb_points)}
-            q = {j: self.data.demandes[j] for j in range(self.data.nb_clients)}
+        if self.capacity:
+            Q = self.data.capacites[i]
+            q = self.data.demandes[j]
             
-            modele.c5 = pe.ConstraintList()
+            modele.c4 = pe.ConstraintList()
             for i in range(self.data.nb_points):
-                modele.c5.add(sum(q[j] * modele.x[i, j] for j in range(self.data.nb_clients)) <= Q[i] * modele.y[i])
+                modele.c4.add(sum(q[j] * modele.x[i, j] for j in range(self.data.nb_clients)) <= Q[i] * modele.y[i])
+        else:
+            modele.c4 = pe.ConstraintList()
+            for i in range(self.data.nb_clients):
+                for j in range(self.data.nb_clients):
+                    modele.c4.add(modele.x[i,j] <= modele.y[i])
 
         self.modele = modele
 

@@ -31,8 +31,9 @@ path_modele = args.cheminModelLp + name_instance
 path_solution = args.cheminVersSolution + name_solution
 
 def read_sol(path_solution):
-
-    """ Read solution file and extract datas into structures"""
+    """ 
+    Read solution file and extract datas into structures
+    """
 
     with open(path_solution, "r") as f: 
         entrepot, liaisons, dist_max = f.read().split('\n')
@@ -46,45 +47,42 @@ def read_sol(path_solution):
     return entrepot, liaisons, dist_max
 
 
-entrepot, liaisons, dist_max = read_sol(path_solution)
-
-structs = PCentreData(path_instance) 
-
 def verif(entrepot, liaisons, dist_max):
-
-    """ make sure that the found solution respect every constraints and is valid"""
+    """ 
+    Make sure that the found solution respect every constraints and is valid
+    """
    
-    # vérif que si une installation est assignée à un client est bien ouverte 
-    # vérif aussi que tout client a bien quelque chose assigné
-
-    for i in range(len(liaisons)):
-            if liaisons[i] >= len(entrepot) or liaisons[i] < 0:
-                raise TypeError("Non valid solution: all client must have associated installation") 
-            if entrepot[liaisons[i]] == 0: # pour chaque entrepot présent dans liaisons, vérifier qu'il est bien ouvert
-                raise TypeError("Non valid solution: client can't be associated to a closed installation")
+    # Vérification que si une installation est assignée à un client est bien ouverte 
+    # Vérification aussi que tout client a bien quelque chose assigné
+    for liaison in liaisons:
+            if liaison >= len(entrepot) or liaison < 0:
+                raise TypeError("Non valid solution: All client must have associated installation") 
+            if entrepot[liaison] == 0: # Pour chaque entrepot présent dans liaisons, vérifier qu'il est bien ouvert
+                raise TypeError("Non valid solution: Client can't be associated to a closed installation")
         
-    #vérif des contraintes de capacités et demandes : 
+    # Vérification des contraintes de capacités et demandes : 
     entrepots_ouverts = {num_entrepot : 0
                          for num_entrepot, val_entrepot in enumerate(entrepot)
                          if val_entrepot}
-    for i in range(len(liaisons)):
-        entrepots_ouverts[liaisons[i]] += structs.q[i] # ajt la quantité dmd par client 
+    for i, liaison in enumerate(liaisons):
+        entrepots_ouverts[liaison] += structs.q[i] # ajt la quantité dmd par client 
     
     for key in entrepots_ouverts: 
         if entrepots_ouverts[key] > structs.Q[key]:
-            raise TypeError("Non valid solutions: all capacities constraint must be satisfied")
+            raise TypeError("Non valid solutions: All capacities constraint must be satisfied")
     
-    
-    # vérif que toutes les distances <= Dmax
-
+    # Vérification que toutes les distances <= Dmax
     for key in entrepots_ouverts:
         for i in range(len(liaisons)):
-            print(structs.d[key][i])
             if structs.d[key][i] > dist_max:
-                raise TypeError("Non valid solution: distances must be inferior to dist_max")
+                raise TypeError("Non valid solution: The maximum distance dist_max is not satisfied")
 
 
 
+
+entrepot, liaisons, dist_max = read_sol(path_solution)
+
+structs = PCentreData(path_instance) 
 
 
 

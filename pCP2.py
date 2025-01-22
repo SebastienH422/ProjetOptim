@@ -66,6 +66,7 @@ class VersionRayon_1(ModelesPCentre):
             
             modele.c2 = pe.Constraint(quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
             
+
         self.modele = modele
 
     def extraire_solution(self):

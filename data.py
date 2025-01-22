@@ -19,6 +19,7 @@ class PCentreData:
 
     def start(self, path_instance : str):
         self.lire_donnees(path_instance = path_instance)
+
         self.calcul_dists()
         self.Deca()
 
@@ -60,6 +61,7 @@ class PCentreData:
         installations = np.array(self.coordonnees_installations)
 
         # Matrice numpy
+
         n = len(clients)
         self.d = np.zeros((n,n))
 
@@ -67,6 +69,7 @@ class PCentreData:
             for j in range(n):
                 diff = clients[i] - installations[j]
                 self.d[i][j] = np.sqrt(np.sum(diff**2))
+
 
     def Deca(self):
         """

@@ -36,6 +36,8 @@ class VersionClassique(ModelesPCentre):
         modele.c3 = pe.Constraint(expr = quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
 
         if self.capacity:
+            #modele.Q = pe.Param(range(self.data.nb_points), name = 'Q', initialize = self.data.capacites, domain = pe.NonNegativeReals)
+            #modele.q = pe.Param(range(self.data.nb_clients), name = 'q', initialize = self.data.demandes, domain = pe.NonNegativeReals)
             Q = self.data.capacites[i]
             q = self.data.demandes[j]
             
@@ -49,9 +51,3 @@ class VersionClassique(ModelesPCentre):
                     modele.c4.add(modele.x[i,j] <= modele.y[i])
 
         self.modele = modele
-
-    def extraire_solution(self):
-        """
-        Extrait la solution du modèle résolu.
-        """
-        pass  # Extraction des valeurs optimales

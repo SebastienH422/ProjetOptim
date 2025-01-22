@@ -6,7 +6,7 @@ class PCentreSolution:
         self.entrepots = []  # Liste des entrepôts ouverts
         self.assignations = {}  # Dictionnaire client -> entrepôt
         self.distance_max = -1
-
+ 
     def ecrire_solution(self, path_solution: str):
         """
         Écrit la solution dans un fichier.

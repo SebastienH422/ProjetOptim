@@ -65,7 +65,7 @@ class PCentreData:
         for i in range(n):
             for j in range(n):
                 diff = clients[i] - installations[j]
-                self.d[i][j] = np.sqrt(np.sum(diff**2))
+                self.d[i][j] = round(np.sqrt(np.sum(diff**2)),2)
 
     def Deca(self):
         """

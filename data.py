@@ -75,3 +75,5 @@ class PCentreData:
             for j in range(self.nb_clients):
                 if self.d[i][j] not in self.Dk: 
                     self.Dk.append(self.d[i][j])
+
+        self.Dk.sort()

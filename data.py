@@ -21,6 +21,7 @@ class PCentreData:
         self.lire_donnees(path_instance = path_instance)
         self.calcul_dists()
         self.Deca()
+        self.afficher_donnees()
 
     def lire_donnees(self, path_instance : str):
         """
@@ -61,7 +62,6 @@ class PCentreData:
         # Matrice numpy
         n = len(clients)
         self.d = np.zeros((n,n))
-
         for i in range(n):
             for j in range(n):
                 diff = clients[i] - installations[j]
@@ -75,3 +75,5 @@ class PCentreData:
             for j in range(self.nb_clients):
                 if self.d[i][j] not in self.Dk: 
                     self.Dk.append(self.d[i][j])
+
+        self.Dk.sort()

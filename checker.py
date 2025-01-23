@@ -75,7 +75,8 @@ def verif(entrepot, liaisons, dist_max, structs):
     for i, j in enumerate(liaisons):
         if structs.d[i][j] > dist_max:
             raise TypeError("Non valid solution: The maximum distance dist_max is not satisfied")
-    print("gucci")
+    
+    print("The found solution is correct")
 
 
 
@@ -84,4 +85,3 @@ entrepot, liaisons, dist_max = read_sol(path_solution)
 structs = PCentreData(path_instance)
 
 verif(entrepot, liaisons, dist_max, structs)
-

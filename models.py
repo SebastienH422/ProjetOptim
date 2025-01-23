@@ -22,7 +22,7 @@ class ModelesPCentre:
         """
         raise NotImplementedError
 
-    def extraire_solution(self):
+    def extraire_solution(self, results):
         """
         Méthode virtuelle à implémenter dans les sous-classes.
         """

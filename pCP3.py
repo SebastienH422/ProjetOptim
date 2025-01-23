@@ -82,7 +82,7 @@ class VersionRayon_2(ModelesPCentre):
             else:
                 solution.variables['y'] = np.zeros(self.data.nb_clients, dtype = int)
                 solution.variables['u'] = np.zeros(len(self.data.Dk), dtype = int)
-                x = np.zeros((self.data.nb_clients, self.data.nb_clients), dtype = int)
+                x = np.zeros(self.data.nb_clients, dtype = int)
 
                 for k in range(len(self.data.Dk)):
                     solution.variables['u'][k] = results.solution.variable[self.modele.u[k].getname()]['Value']
@@ -93,8 +93,8 @@ class VersionRayon_2(ModelesPCentre):
                     solution.entrepots.append(int(entrepot_built))
                     solution.variables['y'][i] = results.solution.variable[self.modele.y[i].getname()]['Value']
                     for j in range(self.data.nb_clients):
-                        if not x[i,j] and self.data.d[i,j] <= solution.distance_max:
-                            x[i,j] = 1
+                        if not x[j] and self.data.d[i,j] <= solution.distance_max:
+                            x[j] = 1
                             solution.assignations[j] = i
 
                 

@@ -24,7 +24,7 @@ class VersionRayon_1(ModelesPCentre):
             modele.z = pe.Var(range(len(self.data.Dk)), name = 'z', domain = pe.Binary)
 
             # Objective function
-            modele.obj = pe.Objective(expr = quicksum([(self.data.Dk[k] - self.data.Dk[k-1]) 
+            modele.obj = pe.Objective(expr = quicksum([(self.data.Dk[k] - self.data.Dk[k - 1]) 
                                                     * modele.z[k] for k in range(1, len(self.data.Dk))]) + self.data.Dk[0])
 
             # Constraintes
@@ -90,13 +90,13 @@ class VersionRayon_1(ModelesPCentre):
 
                 for k in range(1, len(self.data.Dk)):
                     solution.variables['z'][k] = results.solution.variable[self.modele.z[k].getname()]['Value']
-                    if solution.variables['z'][k]: solution.distance_max = self.data.Dk[k]
+                    if solution.variables['z'][k]: solution.distance_max = max(solution.distance_max, self.data.Dk[k])
                 if solution.distance_max == -1: solution.distance_max = self.data.Dk[0]
 
             else:
                 solution.variables['y'] = np.zeros(self.data.nb_clients, dtype = int)
                 solution.variables['z'] = np.zeros(len(self.data.Dk), dtype = int)
-                x = np.zeros((self.data.nb_clients, self.data.nb_clients), dtype = int)
+                x = np.zeros(self.data.nb_clients, dtype = int)
 
                 for k in range(len(self.data.Dk)):
                     solution.variables['z'][k] = results.solution.variable[self.modele.z[k].getname()]['Value']
@@ -107,8 +107,8 @@ class VersionRayon_1(ModelesPCentre):
                     solution.entrepots.append(int(entrepot_built))
                     solution.variables['y'][i] = results.solution.variable[self.modele.y[i].getname()]['Value']
                     for j in range(self.data.nb_clients):
-                        if not x[i,j] and self.data.d[i,j] <= solution.distance_max:
-                            x[i,j] = 1
+                        if not x[j] and self.data.d[i,j] <= solution.distance_max:
+                            x[j] = 1
                             solution.assignations[j] = i
 
                 

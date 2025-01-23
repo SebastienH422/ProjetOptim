@@ -12,4 +12,8 @@
 - `s` chemin vers le dossier contenant les fichiers solutions (ne pas modifier)
 - `m` chemin vers le dossier contenant les fichiers modèles (ne pas modifier)
 
+#### Lancer toutes les instances et toutes les versions
+
+
 ## Appel à checker.py
+python solver.py -v 1 -c 0 -d Instances -t 100 -n 3 -p 1 -i 1 -s Solutions -m Modeles;python solver.py -v 1 -c 1 -d Instances -t 100 -n 3 -p 1 -i 1 -s Solutions -m Modeles;python solver.py -v 2 -c 0 -d Instances -t 100 -n 3 -p 1 -i 1 -s Solutions -m Modeles;python solver.py -v 2 -c 1 -d Instances -t 100 -n 3 -p 1 -i 1 -s Solutions -m Modeles;python solver.py -v 3 -c 0 -d Instances -t 100 -n 3 -p 1 -i 1 -s Solutions -m Modeles;python solver.py -v 3 -c 1 -d Instances -t 100 -n 3 -p 1 -i 1 -s Solutions -m Modeles;python solver.py -v 1 -c 0 -d Instances -t 100 -n 5 -p 2 -i 1 -s Solutions -m Modeles;python solver.py -v 1 -c 1 -d Instances -t 100 -n 5 -p 2 -i 1 -s Solutions -m Modeles;python solver.py -v 2 -c 0 -d Instances -t 100 -n 5 -p 2 -i 1 -s Solutions -m Modeles;python solver.py -v 2 -c 1 -d Instances -t 100 -n 5 -p 2 -i 1 -s Solutions -m Modeles;python solver.py -v 3 -c 0 -d Instances -t 100 -n 5 -p 2 -i 1 -s Solutions -m Modeles;python solver.py -v 3 -c 1 -d Instances -t 100 -n 5 -p 2 -i 1 -s Solutions -m Modeles

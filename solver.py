@@ -47,20 +47,8 @@ if __name__ == "__main__":
 
     modele_inst.statut = results.solver.status == po.SolverStatus.ok
     name_solution = ''
-    
-    solution = PCentreSolution()
-    if modele_inst.statut:
-        solution.distance_max = results.problem.lower_bound
-        for i in range(args.nbPoints):
-            entrepot_built = results.solution.variable[modele_inst.modele.y[i].getname()]['Value']
-            solution.entrepots.append(1 if entrepot_built else 0)
-            for j in range(args.nbPoints):
-                assigned_to_i = results.solution.variable[modele_inst.modele.x[i, j].getname()]['Value']
-                if assigned_to_i: solution.assignations[j] = i
-    else:
-        for i in range(args.nbPoints):
-            solution.entrepots.append(-1)
-            for j in range(args.nbPoints):
-                solution.assignations[j] = -1
+
+    solution = modele_inst.extraire_solution(args.nbPoints, modele_inst.statut, results)
+       
                 
     solution.ecrire_solution(path_solution = path_solution)    

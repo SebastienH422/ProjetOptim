@@ -26,9 +26,9 @@ name_instance = f'n{args.nbPoints}p{args.nbAouvrir}i{args.indiceInstance}'
 name_modele = f'{name_instance}_v{args.version}c{args.avecCapacite}.lp'
 name_solution = f'{name_instance}_v{args.version}c{args.avecCapacite}.sol'
 
-path_instance = args.cheminVersInstance + name_instance
-path_modele = args.cheminModelLp + name_instance
-path_solution = args.cheminVersSolution + name_solution
+path_instance = args.cheminVersInstance + '/' +  name_instance
+path_modele = args.cheminModelLp + '/' +  name_instance
+path_solution = args.cheminVersSolution + '/' + name_solution
 
 def read_sol(path_solution):
     """ 
@@ -47,7 +47,7 @@ def read_sol(path_solution):
     return entrepot, liaisons, dist_max
 
 
-def verif(entrepot, liaisons, dist_max):
+def verif(entrepot, liaisons, dist_max, structs):
     """ 
     Make sure that the found solution respect every constraints and is valid
     """
@@ -72,20 +72,16 @@ def verif(entrepot, liaisons, dist_max):
             raise TypeError("Non valid solutions: All capacities constraint must be satisfied")
     
     # Vérification que toutes les distances <= Dmax
-    for key in entrepots_ouverts:
-        for i in range(len(liaisons)):
-            if structs.d[key][i] > dist_max:
-                raise TypeError("Non valid solution: The maximum distance dist_max is not satisfied")
-
+    for i, j in enumerate(liaisons):
+        if structs.d[i][j] > dist_max:
+            raise TypeError("Non valid solution: The maximum distance dist_max is not satisfied")
+    print("gucci")
 
 
 
 entrepot, liaisons, dist_max = read_sol(path_solution)
 
-structs = PCentreData(path_instance) 
+structs = PCentreData(path_instance)
 
-
-
-
-
+verif(entrepot, liaisons, dist_max, structs)
 

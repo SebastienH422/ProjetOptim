@@ -32,25 +32,26 @@ class VersionRayon_1(ModelesPCentre):
             modele.c1 = pe.Constraint(expr = quicksum([modele.y[i] for i in range(self.data.nb_clients)]) <= self.data.p)
                 
             modele.c2 = pe.ConstraintList()
+            for j in range(self.data.nb_clients):
+                for k, val_Dk in enumerate(self.data.Dk):
+                    modele.c2.add(expr = 1 - modele.z[k] <= quicksum([modele.y[i] if self.data.d[i,j] < val_Dk else 0 for i in range(self.data.nb_clients)]))
+
+            modele.c3 = pe.ConstraintList()
             for i in range(self.data.nb_clients):
                 for j in range(self.data.nb_clients):
-                    modele.c2.add(modele.x[i, j] <= quicksum([modele.z[k] for k in range(len(self.data.Dk)) if self.data.d[i,j] <= self.data.Dk[k]]))
+                    modele.c3.add(modele.x[i, j] <= quicksum([modele.z[k] for k in range(len(self.data.Dk)) if self.data.d[i,j] <= self.data.Dk[k]]))
                     
-            modele.c3 = pe.ConstraintList()
+            modele.c4 = pe.ConstraintList()
             for j in range(self.data.nb_clients):
-                modele.c3.add(quicksum(modele.x[i, j] for i in range(self.data.nb_clients)) == 1)
+                modele.c4.add(quicksum(modele.x[i, j] for i in range(self.data.nb_clients)) == 1)
 
             Q = self.data.Q
             q = self.data.q
             
-            modele.c4 = pe.ConstraintList()
-            for i in range(self.data.nb_clients):
-                modele.c4.add(quicksum([q[j] * modele.x[i, j] for j in range(self.data.nb_clients)]) <= Q[i] * modele.y[i])
-            
             modele.c5 = pe.ConstraintList()
-            for j in range(self.data.nb_clients):
-                for k, val_Dk in enumerate(self.data.Dk):
-                    modele.c5.add(expr = 1 - modele.z[k] <= quicksum([modele.y[i] if self.data.d[i,j] < val_Dk else 0 for i in range(self.data.nb_clients)]))
+            for i in range(self.data.nb_clients):
+                modele.c5.add(quicksum([q[j] * modele.x[i, j] for j in range(self.data.nb_clients)]) <= Q[i] * modele.y[i])
+            
         else:
             # Modèle
             modele = pe.ConcreteModel(name = f'pCP2 sans capacité {self.name_model}')

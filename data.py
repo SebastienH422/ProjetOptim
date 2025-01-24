@@ -1,11 +1,11 @@
 import numpy as np
 
 class PCentreData:
-    def __init__(self, path_instance: str):
+    def __init__(self):
         """
         Initialise les données du problème à partir d'un fichier.
         """
-        self.path_instance = path_instance
+        self.path_instance = None 
         self.nb_clients = None
         self.p = None
         self.coordonnees_clients = [] 
@@ -15,15 +15,7 @@ class PCentreData:
         self.d = None # Matrice des distances
         self.Dk = []
 
-        self.start(path_instance = path_instance)
-
-    def start(self, path_instance : str):
-        self.lire_donnees(path_instance = path_instance)
-        self.calcul_dists()
-        self.Deca()
-        self.afficher_donnees()
-
-    def lire_donnees(self, path_instance : str):
+    def lireData(self, path_instance : str):
         """
         Lit les données depuis un fichier et les stocke dans les attributs de la classe.
         """
@@ -39,6 +31,8 @@ class PCentreData:
                 
                 self.Q.append(qi) # Capacités
                 self.q.append(qj) # Demandes
+        self.calcul_dists()
+        self.Deca()
 
     def afficher_donnees(self):
         """ Affiche les données pour vérifier leur extraction. """

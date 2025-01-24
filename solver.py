@@ -1,54 +1,75 @@
 import argparse
-import pyomo.opt as po
-import pyomo.environ as pe
-from pCP1 import VersionClassique 
+from data import PCentreData
+from pCP1 import VersionClassique
 from pCP2 import VersionRayon_1
 from pCP3 import VersionRayon_2
-from solution import PCentreSolution
+import time
 
-def choisir_version(version, path_data, path_model, name_instance, capacity):
-    if version == 1:
-        return VersionClassique(path_data, path_model, name_instance, capacity)
-    elif version == 2:
-        return VersionRayon_1(path_data, path_model, name_instance, capacity)
-    elif version == 3:
-        return VersionRayon_2(path_data, path_model, name_instance, capacity)
-    else:
-        raise ValueError("Version invalide")
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-v", "--version", type=int, choices=[1, 2, 3], required=True) # version du problème à résoudre
-    parser.add_argument("-c", "--avecCapacite", type=int, choices=[0, 1], required=True) # 1 si les contraintes de capacité sont prises en compte
-    parser.add_argument("-d", "--cheminVersInstance", type=str, required=True) # chemin relatif vers l’instance à résoudre
-    parser.add_argument("-t", "--tempsLimite", type=int, required=True) # temps limite d’exécution du solveur
-    parser.add_argument("-n", "--nbPoints", type=int, required=True) # nombre de sommets dans le graphe
-    parser.add_argument("-p", "--nbAouvrir", type=int, required=True) # nombre d’installations à ouvrir
-    parser.add_argument("-i", "--indiceInstance", type=int, required=True) # indice de l’instance
-    parser.add_argument("-s", "--cheminSolution", type=str, required=True) # chemin relatif vers le fichier dans lequel la solution sera écrite
-    parser.add_argument("-m", "--cheminModelLp", type=str, required=True) #  chemin relatif vers le fichier .lp pour sauvegarder le modèle
+def main():
+    parser = argparse.ArgumentParser(description='Solver script')
+    parser.add_argument('-v', '--version', required=True, type=int, choices=[1, 2, 3], help='Version of the solver')
+    parser.add_argument('-c', '--avecCapacite', required=True, type=int, choices=[0, 1], help='Capacity constraint')
+    parser.add_argument('-d', '--cheminVersInstance', required=True, help='Path to the instance')
+    parser.add_argument('-t', '--tempsLimte', required=True, help='Limit time of the solver')
+    parser.add_argument('-n', '--nbPoints', required=True, type=int, help='Number of nodes')
+    parser.add_argument('-p', '--nbAouvrir', required=True, type=int, help='Number of facility to open')
+    parser.add_argument('-i', '--indiceInstance', required=True, type=int, help='Index of the instance')
+    parser.add_argument('-s', '--dossierSolution', required=True, help='Solution folder')
+    parser.add_argument('-r', '--fichierResultat', required=True, help='Result file')
 
     args = parser.parse_args()
 
+    print("************************** Infos for the Solver **************************")
+    print(f"Version: {args.version}")
+    print(f"With Capacity: {args.avecCapacite}")
+    print(f"Path to Instance: {args.cheminVersInstance}")
+    print(f"Time Limit: {args.tempsLimte}")
+    print(f"Number of Nodes: {args.nbPoints}")
+    print(f"Number to Open: {args.nbAouvrir}")
+    print(f"Index of Instance: {args.indiceInstance}")
+    print(f"Solution Folder: {args.dossierSolution}")
+    print(f"Results file: {args.fichierResultat}")
+    print("**************************************************************************")
+
+    #___________________________Paths to files
     name_instance = f'n{args.nbPoints}p{args.nbAouvrir}i{args.indiceInstance}'
-    name_modele = f'{name_instance}_v{args.version}c{args.avecCapacite}.lp'
     name_solution = f'{name_instance}_v{args.version}c{args.avecCapacite}.sol'
 
     path_instance = f'{args.cheminVersInstance}/{name_instance}'
-    path_modele = f'{args.cheminModelLp}/{name_modele}'
-    path_solution = f'{args.cheminSolution}/{name_solution}'
-    
-    modele_inst = choisir_version(args.version, path_instance, path_modele, name_instance, args.avecCapacite)
-    
-    solver = po.SolverFactory('appsi_highs')
-    solver.options['time_limit'] = args.tempsLimite
+    path_solution = f'{args.dossierSolution}/{name_solution}'
 
-    results = solver.solve(modele_inst.modele, tee = False, load_solutions = False)
+    #___________________________Activation of the capacity constraint
+    capacity = False
+    if args.avecCapacite >= 1:
+        capacity = True
 
-    modele_inst.statut = results.solver.status == po.SolverStatus.ok
-    name_solution = ''
+    #__________________________ Load the data
+    data = PCentreData()
+    data.lireData(path_instance)
+    #__________________________ Create the model
+    if args.version == 1:
+        model = VersionClassique(data)
+    elif args.version == 2:
+        model = VersionRayon_1(data)
+    else:
+        model = VersionRayon_2(data)
 
-    solution = modele_inst.extraire_solution(args.nbPoints, modele_inst.statut, results)
-       
-                
-    solution.ecrire_solution(path_solution = path_solution)    
+    start_time = time.time()
+    model.creer_modele(capacity)
+    end_time = time.time()
+    model.temps_creation = round(end_time - start_time, 5)
+
+    #__________________________ Solve the model
+    model.lancer(args.tempsLimte)
+
+    #__________________________ Save the solution
+    model.extraire_solution()
+    model.solution.ecrire_solution(path_solution)
+
+    #__________________________ write results in dataBase file
+    with open(args.fichierResultat, 'a') as f:
+        f.write(f'{args.nbPoints} {args.nbAouvrir} {args.indiceInstance} {args.version} {args.avecCapacite} {model.erreur} {model.status} {model.etat} {model.temps_creation} {model.temps} {model.gap} {model.obj} {model.obj_upper} {model.obj_lower}\n')
+
+if __name__ == "__main__":
+    main()

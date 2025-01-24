@@ -25,6 +25,7 @@ class ModelesPCentre:
         self.erreur = 'ras'
 
         self.capacity = -1
+        self.results = None
 
     #_______________________ Méthodes Création _______________________
     def creer_modele(self, capacite):
@@ -33,7 +34,7 @@ class ModelesPCentre:
         """
         raise NotImplementedError("This method should be overridden by subclasses")
 
-    def extraire_solution(self, results):
+    def extraire_solution(self):
         """
         Méthode virtuelle à implémenter dans les sous-classes.
         """
@@ -106,4 +107,4 @@ class ModelesPCentre:
                 self.gap = 100 * self.gap / abs(self.obj_upper)
             self.gap = round(self.gap, 2)
         
-        self.results = results
+            self.results = results

@@ -1,17 +1,17 @@
 #!/bin/bash
 
-dossier_Instances="...................................../Instances"
-dossier_Solutions="..................................../Solutions"
-dossier_Experimentation="................................/Experimentations"
+dossier_Instances="Instances"
+dossier_Solutions="Solutions"
+dossier_Experimentation="Experimentations"
 
 
 Noeuds=(300 500 1000 2000 3000) # Ensemble des valeur possible de n
 # Les valeurs de p pour chaque n
-P_300=(30 42 75 100) 
+# P_300=(30 42 75 100) 
 P_500=(50 71 125 166)
-P_1000=(100 142 250 333)
-P_2000=(200 285 500 666)
-P_3000=(300 428 750 1000)
+# P_1000=(100 142 250 333)
+# P_2000=(200 285 500 666)
+# P_3000=(300 428 750 1000)
 
 index=(1 2 3 4 5) # Ensemble des valeurs possibles de i
 version=(1 2 3) # Les versions du problème

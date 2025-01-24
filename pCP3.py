@@ -1,21 +1,22 @@
 from models import ModelesPCentre
-from solution import PCentreSolution
 import pyomo.environ as pe
 from pyomo.core import quicksum
-import numpy as np
+from data import PCentreData
 
 class VersionRayon_2(ModelesPCentre): 
 
-    def __init__(self, path_data, path_model, name_model, capacity):
-        super().__init__(path_data, path_model, name_model, capacity)
-        self.creer_modele()
+    def __init__(self, data: PCentreData):
+        super().__init__(data)
 
-    def creer_modele(self):
+    #_______________________ Méthodes Création _______________________
+    def creer_modele(self, capacity):
         """
         Implémente la version classique du problème.
         """
+        self.capacity = capacity
+
         # Modèle
-        modele = pe.ConcreteModel(name = f'pCP3 {self.name_model}')
+        modele = pe.ConcreteModel(name = f'pCP3')
 
         # Variables
         modele.y = pe.Var(range(self.data.nb_clients), name = 'y', domain = pe.Binary)
@@ -27,7 +28,7 @@ class VersionRayon_2(ModelesPCentre):
         # Contraintes
         modele.c1 = pe.Constraint(expr = quicksum(modele.y[i] for i in range(self.data.nb_clients)) <= self.data.p)
 
-        if self.capacity:  
+        if capacity:  
             # Variable supplémentaire
             modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain=pe.Binary)
 
@@ -56,36 +57,29 @@ class VersionRayon_2(ModelesPCentre):
         self.modele = modele
     
     
-    def extraire_solution(self, nb_points, statut, results):
-        
-        solution = PCentreSolution()
-        
-        if statut:
-            solution.distance_max = results.problem.lower_bound
-            for i in range(nb_points):
-                entrepot_built = results.solution.variable[self.modele.y[i].getname()]['Value']
-                solution.entrepots.append(int(entrepot_built))
+    def extraire_solution(self):        
+        if self.status:
+            self.solution.distance_max = self.obj
+            for i in range(self.data.nb_clients):
+                entrepot_built = pe.value(self.modele.y[i]) # self.results.solution.variable[self.modele.y[i].getname()]['Value']
+                self.solution.entrepots.append(int(entrepot_built))
 
             if self.capacity: # Si on considère les contraintes de capacités 
-                for j in range(nb_points):
-                    for i in range(nb_points):
-                        assigned_to_i = results.solution.variable[self.modele.x[i, j].getname()]['Value']
+                for j in range(self.data.nb_clients):
+                    for i in range(self.data.nb_clients):
+                        assigned_to_i = pe.value(self.modele.x[i,j]) # self.results.solution.variable[self.modele.x[i, j].getname()]['Value']
                         if assigned_to_i:
-                            solution.assignations[j] = int(i)
+                            self.solution.assignations[j] = int(i)
             else: # Si on considère pas les contraintes de capacités 
-                for j in range(nb_points):
-                    for i in range(nb_points):
-                        if self.data.d[i,j] <= solution.distance_max and solution.entrepots[i]:
-                            solution.assignations[j] = int(i)
+                for j in range(self.data.nb_clients):
+                    for i in range(self.data.nb_clients):
+                        if self.data.d[i,j] <= self.solution.distance_max and self.solution.entrepots[i]:
+                            self.solution.assignations[j] = int(i)
                             break
 
         else: # Si ça échoue, on met '-1' partout
-
-            for i in range(nb_points):
-                solution.entrepots.append(-1)
-                for j in range(nb_points):
-                    solution.assignations[j] = -1
-        
-        return solution
-            
+            for i in range(self.data.nb_clients):
+                self.solution.entrepots.append(-1)
+                for j in range(self.data.nb_clients):
+                    self.solution.assignations[j] = -1            
         

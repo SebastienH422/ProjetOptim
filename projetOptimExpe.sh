@@ -5,21 +5,15 @@ dossier_Solutions="Solutions"
 dossier_Experimentation="Experimentations"
 
 
+Noeuds=(5 10 20 30 50) # Ensemble des valeur possible de n
 # Les valeurs de p pour chaque n
-Noeuds=(300) # Ensemble des valeurs possibles de n: 300 500 1000 2000 3000
-P_300=(30 42 75 100) 
-P_500=(50 71 125 166)
-P_1000=(100 142 250 333)
-P_2000=(200 285 500 666)
-P_3000=(300 428 750 1000)
+P_5=(1 2 3) 
+P_10=(1 2 3)
+P_20=(2 5 6)
+P_30=(3 7 10)
+P_50=(5 12 16)
+
 index=(1 2 3 4 5) # Ensemble des valeurs possibles de i
-
-# Petites instances
-# Noeuds=(3 5)
-# P_3=(1)
-# P_5=(2)
-# index=(1)
-
 version=(1 2 3) # Les versions du problème
 capacite=(0 1) # Les valeurs d'activation de la contrainte de capacité
 TL=600  # Temps limite de résolution

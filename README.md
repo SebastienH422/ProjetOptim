@@ -1,5 +1,8 @@
 # ProjetOptim
 
+## Environnement pyomo
+> source /net/ens/pythonPyomoEnv/pyomoEnv/bin/activate
+
 ## Appel à projetOptimExpe.sh
 > ./projetOptimExpe.sh > LOG/{nom_fichier}.log
 

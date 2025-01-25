@@ -46,7 +46,7 @@ class VersionClassique(ModelesPCentre):
             
             modele.c4 = pe.ConstraintList()
             for i in range(self.data.nb_clients):
-                modele.c4.add(sum(q[j] * modele.x[i, j] for j in range(self.data.nb_clients)) <= Q[i] * modele.y[i])
+                modele.c4.add(quicksum(q[j] * modele.x[i, j] for j in range(self.data.nb_clients)) <= Q[i] * modele.y[i])
         else:
             modele.c4 = pe.ConstraintList()
             for i in range(self.data.nb_clients):

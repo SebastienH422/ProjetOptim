@@ -5,18 +5,24 @@ dossier_Solutions="Solutions"
 dossier_Experimentation="Experimentations"
 
 
-Noeuds=(300 500 1000 2000 3000) # Ensemble des valeur possible de n
 # Les valeurs de p pour chaque n
-# P_300=(30 42 75 100) 
+Noeuds=(300) # Ensemble des valeurs possibles de n: 300 500 1000 2000 3000
+P_300=(30 42 75 100) 
 P_500=(50 71 125 166)
-# P_1000=(100 142 250 333)
-# P_2000=(200 285 500 666)
-# P_3000=(300 428 750 1000)
-
+P_1000=(100 142 250 333)
+P_2000=(200 285 500 666)
+P_3000=(300 428 750 1000)
 index=(1 2 3 4 5) # Ensemble des valeurs possibles de i
+
+# Petites instances
+# Noeuds=(3 5)
+# P_3=(1)
+# P_5=(2)
+# index=(1)
+
 version=(1 2 3) # Les versions du problème
 capacite=(0 1) # Les valeurs d'activation de la contrainte de capacité
-TL=60  # Temps limite de résolution
+TL=600  # Temps limite de résolution
 
 for n in "${Noeuds[@]}"; do
     results_file="${dossier_Experimentation}/results_n${n}.txt"

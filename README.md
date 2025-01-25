@@ -1,5 +1,8 @@
 # ProjetOptim
 
+## Appel à projetOptimExpe.sh
+> ./projetOptimExpe.sh > LOG/{nom_fichier}.log
+
 ## Appel à solver.py
 > python solver.py -v 1 -c 0 -d Instances -t 100 -n 3 -p 1 -i 1 -s Solutions -m Modeles
 - `v` **version** (1, 2, 3)

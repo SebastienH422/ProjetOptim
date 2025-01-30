@@ -39,8 +39,11 @@ class VersionRayon_1(ModelesPCentre):
             modele.c3 = pe.ConstraintList()
             for i in range(self.data.nb_clients):
                 for j in range(self.data.nb_clients):
-                    modele.c3.add(modele.x[i, j] <= quicksum([modele.z[k] for k in range(len(self.data.Dk)) if self.data.d[i,j] <= self.data.Dk[k]]))
-                    
+                    for k in range(len(self.data.Dk)):
+                        if self.data.d[i,j] >= self.data.Dk[k]:
+                            modele.c3.add(modele.x[i,j] <= modele.z[k])
+
+
             modele.c4 = pe.ConstraintList()
             for j in range(self.data.nb_clients):
                 modele.c4.add(quicksum(modele.x[i, j] for i in range(self.data.nb_clients)) == 1)

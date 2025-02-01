@@ -60,13 +60,13 @@ class VersionClassique(ModelesPCentre):
         if self.status:
             self.solution.distance_max = self.obj
             for i in range(self.data.nb_clients):
-                entrepot_built = pe.value(self.modele.y[i]) # self.results.solution.variable[self.modele.y[i].getname()]['Value']
+                entrepot_built = round(pe.value(self.modele.y[i])) # self.results.solution.variable[self.modele.y[i].getname()]['Value']
                 self.solution.entrepots.append(int(entrepot_built))
 
             # if self.capacity: # Si on considère les contraintes de capacités 
             for i in range(self.data.nb_clients):
                 for j in range(self.data.nb_clients):
-                    assigned_to_i = pe.value(self.modele.x[i,j]) # self.results.solution.variable[self.modele.x[i, j].getname()]['Value']
+                    assigned_to_i = round(pe.value(self.modele.x[i,j])) # self.results.solution.variable[self.modele.x[i, j].getname()]['Value']
                     if assigned_to_i:
                         self.solution.assignations[j] = int(i)
             # else: # Si on considère pas les contraintes de capacités 

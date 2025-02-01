@@ -19,8 +19,8 @@ class VersionRayon_2(ModelesPCentre):
         modele = pe.ConcreteModel(name = f'pCP3')
 
         # Variables
-        modele.y = pe.Var(range(self.data.nb_clients), name = 'y', domain = pe.NonNegativeReals, bound = (0, 1))
-        modele.u = pe.Var(range(len(self.data.Dk)), name = 'u', domain = pe.NonNegativeReals, bound = (0, 1))
+        modele.y = pe.Var(range(self.data.nb_clients), name = 'y', domain = pe.NonNegativeReals, bounds = (0, 1))
+        modele.u = pe.Var(range(len(self.data.Dk)), name = 'u', domain = pe.NonNegativeReals, bounds = (0, 1))
 
         # Fonction objectif 
         modele.obj = pe.Objective(expr = quicksum([self.data.Dk[k] * modele.u[k] for k in range(len(self.data.Dk))]))
@@ -30,7 +30,7 @@ class VersionRayon_2(ModelesPCentre):
 
         if capacity:  
             # Variable supplémentaire
-            modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain=pe.NonNegativeReals, bound = (0, 1))
+            modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain=pe.NonNegativeReals, bounds = (0, 1))
 
             # Contraintes supplémentaires
             modele.c2 = pe.ConstraintList()

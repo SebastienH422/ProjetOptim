@@ -82,13 +82,13 @@ class VersionRayon_1(ModelesPCentre):
         if self.status:
             self.solution.distance_max = self.obj
             for i in range(self.data.nb_clients):
-                entrepot_built = pe.value(self.modele.y[i])
+                entrepot_built = round(pe.value(self.modele.y[i]))
                 self.solution.entrepots.append(int(entrepot_built))
 
             if self.capacity: # Si on considère les contraintes de capacités 
                 for i in range(self.data.nb_clients):
                     for j in range(self.data.nb_clients):
-                        assigned_to_i = pe.value(self.modele.x[i, j])
+                        assigned_to_i = round(pe.value(self.modele.x[i, j]))
                         if assigned_to_i:
                             self.solution.assignations[j] = int(i)
             else: # Si on considère pas les contraintes de capacités 

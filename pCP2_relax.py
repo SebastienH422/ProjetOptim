@@ -20,9 +20,9 @@ class VersionRayon_1(ModelesPCentre):
             modele = pe.ConcreteModel(name = f'pCP2 avec capacité')
 
             # Variables
-            modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain=pe.NonNegativeReals, bound = (0, 1))
-            modele.y = pe.Var(range(self.data.nb_clients), name ='y', domain=pe.NonNegativeReals, bound = (0, 1))
-            modele.z = pe.Var(range(len(self.data.Dk)), name = 'z', domain = pe.NonNegativeReals, bound = (0, 1))
+            modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain=pe.NonNegativeReals, bounds = (0, 1))
+            modele.y = pe.Var(range(self.data.nb_clients), name ='y', domain=pe.NonNegativeReals, bounds = (0, 1))
+            modele.z = pe.Var(range(len(self.data.Dk)), name = 'z', domain = pe.NonNegativeReals, bounds = (0, 1))
 
             # Objective function
             modele.obj = pe.Objective(expr = quicksum([(self.data.Dk[k] - self.data.Dk[k - 1]) 

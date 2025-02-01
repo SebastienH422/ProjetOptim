@@ -19,8 +19,8 @@ class VersionClassique(ModelesPCentre):
         modele = pe.ConcreteModel(name = f'pCP1 Version classique')
 
         # Variables
-        modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain = pe.NonNegativeReals, bound = (0, 1))
-        modele.y = pe.Var(range(self.data.nb_clients), name = 'y', domain = pe.NonNegativeReals, bound = (0, 1))
+        modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain = pe.NonNegativeReals, bounds = (0, 1))
+        modele.y = pe.Var(range(self.data.nb_clients), name = 'y', domain = pe.NonNegativeReals, bounds = (0, 1))
         modele.D = pe.Var(name = 'D', domain = pe.NonNegativeReals)
 
         # Fonction objectif

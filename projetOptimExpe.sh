@@ -5,17 +5,17 @@ dossier_Solutions="Solutions"
 dossier_Experimentation="Experimentations"
 
 
-Noeuds=(5 10 20 30 50) # Ensemble des valeur possible de n
+Noeuds=(50) # Ensemble des valeur possible de n
 # Les valeurs de p pour chaque n
 P_5=(1 2 3) 
 P_10=(1 2 3)
 P_20=(2 5 6)
 P_30=(3 7 10)
-P_50=(5 12 16)
+P_50=(16 12)
 
-index=(1 2 3 4 5) # Ensemble des valeurs possibles de i
-version=(1 2 3) # Les versions du problème
-capacite=(0 1) # Les valeurs d'activation de la contrainte de capacité
+index=(5 4 3 2 1) # Ensemble des valeurs possibles de i
+version=(3 2 1) # Les versions du problème
+capacite=(1 0) # Les valeurs d'activation de la contrainte de capacité
 TL=600  # Temps limite de résolution
 
 for n in "${Noeuds[@]}"; do

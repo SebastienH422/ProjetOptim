@@ -1,91 +1,91 @@
 n p i v c erreur statut etat temps_creation temps gap obj obj_upper obj_lower
-50 5 1 1 0 ras True True 0.05817 16.715 0.0 175.42 175.42 175.42
-50 5 1 1 1 ras True True 0.05418 32.506 0.0 197.21 197.21 197.21
-50 5 1 2 0 ras True True 2.24796 317.36 0.0 175.42 175.42 175.42
-50 5 1 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.85101 -1 -1 -1 -1 -1
-50 5 1 3 0 ras True True 1.79371 40.002 0.0 175.42 175.42 175.42
-50 5 1 3 1 ras True False 19.90344 608.851 84.53 197.23 197.23 30.51
-50 5 2 1 0 ras True True 0.05807 12.164 0.12 163.37 163.37 163.17
-50 5 2 1 1 ras True True 0.04883 37.881 0.0 166.33 166.33 166.33
-50 5 2 2 0 ras True True 2.29364 245.837 0.58 163.37 163.37 162.418
-50 5 2 2 1 ras True False 12.38852 698.794 18.5 166.33 166.33 135.553
-50 5 2 3 0 ras True True 1.70265 37.607 0.0 163.37 163.37 163.37
-50 5 2 3 1 ras True False 20.07609 608.62 92.85 239.41 239.41 17.12
-50 5 3 1 0 ras True True 0.06004 16.779 0.0 160.52 160.52 160.52
-50 5 3 1 1 ras True True 0.05126 38.902 0.0 162.51 162.51 162.51
-50 5 3 2 0 ras True True 2.28162 206.533 0.5 160.52 160.52 159.716
-50 5 3 2 1 ras True False 11.52261 650.165 30.66 196.64 196.64 136.358
-50 5 3 3 0 ras True True 1.78507 43.631 0.0 160.52 160.52 160.52
-50 5 3 3 1 ras True False 20.03247 608.745 93.48 241.71 241.71 15.77
-50 5 4 1 0 ras True True 0.05984 15.542 0.0 163.71 163.71 163.71
-50 5 4 1 1 ras True True 0.05142 37.14 0.37 168.43 168.43 167.801
-50 5 4 2 0 ras True True 2.19022 258.326 0.58 163.71 163.71 162.768
-50 5 4 2 1 ras True False 12.29221 698.606 17.75 170.52 170.52 140.259
-50 5 4 3 0 ras True True 1.8556 41.035 0.0 163.71 163.71 163.71
-50 5 4 3 1 ras True False 20.37283 608.799 92.49 201.89 201.89 15.17
-50 5 5 1 0 ras True True 0.06474 16.955 0.0 145.5 145.5 145.5
-50 5 5 1 1 ras True True 0.04995 87.405 0.0 169.73 169.73 169.73
-50 5 5 2 0 ras True True 2.24349 151.947 0.63 145.5 145.5 144.585
-50 5 5 2 1 ras True False 12.08015 652.182 59.59 328.7 328.7 132.834
-50 5 5 3 0 ras True True 1.90149 33.826 0.0 145.5 145.5 145.5
-50 5 5 3 1 ras True False 21.49448 609.217 89.87 187.49 187.49 19.0
-50 12 1 1 0 ras True True 0.05908 11.891 0.0 91.68 91.68 91.68
-50 12 1 1 1 ras True True 0.04953 62.142 0.59 123.26 123.26 122.535
-50 12 1 2 0 ras True True 2.25437 74.708 0.95 91.68 91.68 90.809
-50 12 1 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.92566 -1 -1 -1 -1 -1
-50 12 1 3 0 ras True True 1.68803 21.152 0.0 91.68 91.68 91.68
-50 12 1 3 1 ras True True 20.03021 439.117 0.54 123.26 123.26 122.59
-50 12 2 1 0 ras True True 0.05919 19.183 0.0 94.01 94.01 94.01
-50 12 2 1 1 ras True True 0.0482 29.634 0.89 107.81 107.81 106.85
-50 12 2 2 0 ras True True 2.22011 131.816 0.55 94.01 94.01 93.49
-50 12 2 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.61633 -1 -1 -1 -1 -1
-50 12 2 3 0 ras True True 1.85383 25.169 0.0 94.01 94.01 94.01
-50 12 2 3 1 ras True True 20.17621 372.982 0.39 108.23 108.23 107.81
-50 12 3 1 0 ras True True 0.0635 14.75 0.0 94.54 94.54 94.54
-50 12 3 1 1 ras True True 0.05332 30.043 0.0 106.57 106.57 106.57
-50 12 3 2 0 ras True True 2.2228 123.106 1.01 94.54 94.54 93.585
-50 12 3 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.69226 -1 -1 -1 -1 -1
-50 12 3 3 0 ras True True 1.72758 23.314 0.0 94.54 94.54 94.54
-50 12 3 3 1 ras True True 20.83616 469.172 0.63 107.25 107.25 106.57
-50 12 4 1 0 ras True True 0.06299 15.278 0.0 95.63 95.63 95.63
-50 12 4 1 1 ras True True 0.05236 31.271 0.0 114.11 114.11 114.11
-50 12 4 2 0 ras True True 2.26132 85.89 0.32 95.63 95.63 95.324
-50 12 4 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 12.45172 -1 -1 -1 -1 -1
-50 12 4 3 0 ras True True 1.71421 22.555 0.0 95.63 95.63 95.63
-50 12 4 3 1 ras True True 19.9033 480.831 0.85 114.48 114.48 113.51
-50 12 5 1 0 ras True True 0.05693 9.025 0.0 93.15 93.15 93.15
-50 12 5 1 1 ras True True 0.04726 64.7 0.61 120.11 120.11 119.381
-50 12 5 2 0 ras True True 2.21369 122.511 1.01 93.15 93.15 92.213
-50 12 5 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.85456 -1 -1 -1 -1 -1
-50 12 5 3 0 ras True True 1.70306 29.482 0.0 93.15 93.15 93.15
-50 12 5 3 1 ras True False 20.10619 608.407 98.12 249.91 249.91 4.7
-50 16 1 1 0 ras True True 0.05746 20.561 0.0 83.86 83.86 83.86
-50 16 1 1 1 ras True True 0.0488 229.427 0.85 116.18 116.18 115.191
-50 16 1 2 0 ras True True 2.24808 71.563 1.08 83.86 83.86 82.958
-50 16 1 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.92143 -1 -1 -1 -1 -1
-50 16 1 3 0 ras True True 1.88806 28.919 0.0 83.86 83.86 83.86
-50 16 1 3 1 ras True False 20.91766 608.815 6.01 117.11 117.11 110.07
-50 16 2 1 0 ras True True 0.05972 28.322 0.0 80.4 80.4 80.4
-50 16 2 1 1 ras True True 0.0489 46.855 0.93 105.72 105.72 104.733
-50 16 2 2 0 ras True True 2.22773 80.858 0.94 80.4 80.4 79.644
-50 16 2 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.65008 -1 -1 -1 -1 -1
-50 16 2 3 0 ras True True 1.7943 24.252 0.0 80.4 80.4 80.4
-50 16 2 3 1 ras True True 20.18297 378.257 0.72 105.86 105.86 105.1
-50 16 3 1 0 ras True True 0.06359 15.495 0.56 81.05 81.05 80.598
-50 16 3 1 1 ras True True 0.04932 37.499 0.0 112.22 112.22 112.22
-50 16 3 2 0 ras True True 2.17417 108.165 0.99 81.05 81.05 80.251
-50 16 3 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.82164 -1 -1 -1 -1 -1
-50 16 3 3 0 ras True True 1.79562 33.506 0.0 81.05 81.05 81.05
-50 16 3 3 1 ras True True 20.30139 440.795 0.84 113.17 113.17 112.22
-50 16 4 1 0 ras True True 0.0614 14.266 0.0 82.98 82.98 82.98
-50 16 4 1 1 ras True True 0.04962 43.779 0.7 119.71 119.71 118.87
-50 16 4 2 0 ras True True 2.27225 92.582 1.1 82.98 82.98 82.068
-50 16 4 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.68215 -1 -1 -1 -1 -1
-50 16 4 3 0 ras True True 1.81562 24.007 0.0 82.98 82.98 82.98
-50 16 4 3 1 ras True True 19.76864 347.193 0.81 119.71 119.71 118.74
-50 16 5 1 0 ras True True 0.06178 32.627 0.0 73.44 73.44 73.44
-50 16 5 1 1 ras True True 0.04907 32.888 0.0 104.17 104.17 104.17
-50 16 5 2 0 ras True True 2.22855 43.84 1.34 73.44 73.44 72.455
-50 16 5 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 11.81987 -1 -1 -1 -1 -1
-50 16 5 3 0 ras True True 1.81571 28.62 0.0 73.44 73.44 73.44
-50 16 5 3 1 ras True True 20.34974 323.672 0.82 104.17 104.17 103.32
+50 5 1 1 0 ras True True 0.07048 19.159 0.0 175.42 175.42 175.42
+50 5 1 1 1 ras True True 0.05403 34.077 0.0 197.21 197.21 197.21
+50 5 1 2 0 ras True True 2.59559 509.548 0.0 175.42 175.42 175.42
+50 5 1 2 1 ras True False 23.99993 703.001 93.14 502.8 502.8 34.48
+50 5 1 3 0 ras True True 2.62256 59.701 0.0 175.42 175.42 175.42
+50 5 1 3 1 ras True False 23.65132 615.307 88.36 201.67 201.67 23.47
+50 5 2 1 0 ras True True 0.06326 14.452 0.12 163.37 163.37 163.17
+50 5 2 1 1 ras True True 0.06378 43.526 0.0 166.33 166.33 166.33
+50 5 2 2 0 ras True True 2.86466 328.141 0.58 163.37 163.37 162.418
+50 5 2 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 15.57447 -1 -1 -1 -1 -1
+50 5 2 3 0 ras True True 2.22853 73.823 0.0 163.37 163.37 163.37
+50 5 2 3 1 ras True False 29.4762 623.482 98.29 349.61 349.61 5.98
+50 5 3 1 0 ras True True 0.06808 25.539 0.0 160.52 160.52 160.52
+50 5 3 1 1 ras True True 0.06274 65.352 0.0 162.51 162.51 162.51
+50 5 3 2 0 ras True True 2.85849 386.579 0.5 160.52 160.52 159.716
+50 5 3 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 19.3589 -1 -1 -1 -1 -1
+50 5 3 3 0 ras True True 2.65267 97.189 0.0 160.52 160.52 160.52
+50 5 3 3 1 ras True False 30.9227 624.669 98.25 345.18 345.18 6.05
+50 5 4 1 0 ras True True 0.06173 25.142 0.0 163.71 163.71 163.71
+50 5 4 1 1 ras True True 0.05613 64.129 0.37 168.43 168.43 167.801
+50 5 4 2 0 ras True True 2.66812 471.207 0.58 163.71 163.71 162.768
+50 5 4 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 19.57196 -1 -1 -1 -1 -1
+50 5 4 3 0 ras True True 1.98309 59.076 0.0 163.71 163.71 163.71
+50 5 4 3 1 ras True False 19.97414 615.78 93.38 213.7 213.7 14.14
+50 5 5 1 0 ras True True 0.04877 13.848 0.0 145.5 145.5 145.5
+50 5 5 1 1 ras True True 0.04173 76.766 0.0 169.73 169.73 169.73
+50 5 5 2 0 ras True True 1.90698 177.14 0.63 145.5 145.5 144.585
+50 5 5 2 1 ras True False 16.41982 669.819 59.63 328.7 328.7 132.687
+50 5 5 3 0 ras True True 1.93533 37.319 0.0 145.5 145.5 145.5
+50 5 5 3 1 ras True False 19.13036 615.534 90.2 193.79 193.79 19.0
+50 12 1 1 0 ras True True 0.05083 14.371 0.0 91.68 91.68 91.68
+50 12 1 1 1 ras True True 0.04597 105.325 0.59 123.26 123.26 122.535
+50 12 1 2 0 ras True True 3.09267 120.374 0.95 91.68 91.68 90.809
+50 12 1 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 17.50284 -1 -1 -1 -1 -1
+50 12 1 3 0 ras True True 2.1447 46.486 0.0 91.68 91.68 91.68
+50 12 1 3 1 ras True False 29.05415 620.804 31.14 123.26 123.26 84.88
+50 12 2 1 0 ras True True 0.0754 23.618 0.0 94.01 94.01 94.01
+50 12 2 1 1 ras True True 0.06637 39.047 0.89 107.81 107.81 106.85
+50 12 2 2 0 ras True True 2.79958 162.557 0.55 94.01 94.01 93.49
+50 12 2 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 15.66999 -1 -1 -1 -1 -1
+50 12 2 3 0 ras True True 2.36282 36.575 0.0 94.01 94.01 94.01
+50 12 2 3 1 ras True True 22.98392 407.848 0.39 108.23 108.23 107.81
+50 12 3 1 0 ras True True 0.05654 15.394 0.0 94.54 94.54 94.54
+50 12 3 1 1 ras True True 0.05907 29.178 0.0 106.57 106.57 106.57
+50 12 3 2 0 ras True True 2.27414 130.552 1.01 94.54 94.54 93.585
+50 12 3 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 12.44566 -1 -1 -1 -1 -1
+50 12 3 3 0 ras True True 1.84344 27.827 0.0 94.54 94.54 94.54
+50 12 3 3 1 ras True True 18.58018 477.458 0.63 107.25 107.25 106.57
+50 12 4 1 0 ras True True 0.06311 14.582 0.0 95.63 95.63 95.63
+50 12 4 1 1 ras True True 0.04652 28.861 0.0 114.11 114.11 114.11
+50 12 4 2 0 ras True True 2.31292 88.618 0.32 95.63 95.63 95.324
+50 12 4 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 13.18427 -1 -1 -1 -1 -1
+50 12 4 3 0 ras True True 1.79743 28.096 0.0 95.63 95.63 95.63
+50 12 4 3 1 ras True True 17.41271 528.391 0.85 114.48 114.48 113.51
+50 12 5 1 0 ras True True 0.07785 9.518 0.0 93.15 93.15 93.15
+50 12 5 1 1 ras True True 0.05756 66.21 0.61 120.11 120.11 119.381
+50 12 5 2 0 ras True True 2.38293 131.59 1.01 93.15 93.15 92.213
+50 12 5 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 12.71824 -1 -1 -1 -1 -1
+50 12 5 3 0 ras True True 1.91689 35.252 0.0 93.15 93.15 93.15
+50 12 5 3 1 ras True False 20.52259 613.202 98.15 254.32 254.32 4.7
+50 16 1 1 0 ras True True 0.06834 29.855 0.0 83.86 83.86 83.86
+50 16 1 1 1 ras True True 0.05226 366.325 0.85 116.18 116.18 115.191
+50 16 1 2 0 ras True True 2.73626 110.64 1.08 83.86 83.86 82.958
+50 16 1 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 18.83265 -1 -1 -1 -1 -1
+50 16 1 3 0 ras True True 2.14199 49.593 0.0 83.86 83.86 83.86
+50 16 1 3 1 ras True False 27.9581 619.275 6.82 118.13 118.13 110.07
+50 16 2 1 0 ras True True 0.07333 33.672 0.0 80.4 80.4 80.4
+50 16 2 1 1 ras True True 0.06539 52.974 0.93 105.72 105.72 104.733
+50 16 2 2 0 ras True True 3.08314 98.514 0.94 80.4 80.4 79.644
+50 16 2 2 1 ras True False 15.66668 685.587 94.45 568.38 568.38 31.57
+50 16 2 3 0 ras True True 1.84621 27.527 0.0 80.4 80.4 80.4
+50 16 2 3 1 ras True True 17.61564 393.04 0.72 105.86 105.86 105.1
+50 16 3 1 0 ras True True 0.06774 14.994 0.56 81.05 81.05 80.598
+50 16 3 1 1 ras True True 0.05819 34.195 0.0 112.22 112.22 112.22
+50 16 3 2 0 ras True True 2.23698 112.196 0.99 81.05 81.05 80.251
+50 16 3 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 15.12636 -1 -1 -1 -1 -1
+50 16 3 3 0 ras True True 2.01025 36.655 0.0 81.05 81.05 81.05
+50 16 3 3 1 ras True True 16.79689 450.582 0.84 113.17 113.17 112.22
+50 16 4 1 0 ras True True 0.05555 13.068 0.0 82.98 82.98 82.98
+50 16 4 1 1 ras True True 0.05321 39.932 0.7 119.71 119.71 118.87
+50 16 4 2 0 ras True True 2.22192 100.593 1.1 82.98 82.98 82.068
+50 16 4 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 16.95554 -1 -1 -1 -1 -1
+50 16 4 3 0 ras True True 1.8412 26.879 0.0 82.98 82.98 82.98
+50 16 4 3 1 ras True True 16.91447 353.047 0.81 119.71 119.71 118.74
+50 16 5 1 0 ras True True 0.05656 31.251 0.0 73.44 73.44 73.44
+50 16 5 1 1 ras True True 0.06028 32.598 0.0 104.17 104.17 104.17
+50 16 5 2 0 ras True True 2.48322 47.794 1.34 73.44 73.44 72.455
+50 16 5 2 1 A feasible solution was not found, so no solution can be loaded. If using the appsi.solvers.Highs interface, you can set opt.config.load_solution=False. If using the environ.SolverFactory interface, you can set opt.solve(model, load_solutions = False). Then you can check results.termination_condition and results.best_feasible_objective before loading a solution. False False 12.35903 -1 -1 -1 -1 -1
+50 16 5 3 0 ras True True 1.88047 33.233 0.0 73.44 73.44 73.44
+50 16 5 3 1 ras True True 19.15165 377.114 0.82 104.17 104.17 103.32

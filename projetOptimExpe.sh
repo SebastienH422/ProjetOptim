@@ -10,8 +10,8 @@ Noeuds=(50) # Ensemble des valeur possible de n
 P_5=(1 2 3) 
 P_10=(1 2 3)
 P_20=(2 5 6)
-P_30=(3 7 10)
-P_50=(16 12)
+P_30=(10 7 3)
+P_50=(16 12 5)
 
 index=(5 4 3 2 1) # Ensemble des valeurs possibles de i
 version=(3 2 1) # Les versions du problème

@@ -19,8 +19,8 @@ class VersionClassique(ModelesPCentre):
         modele = pe.ConcreteModel(name = f'pCP1 Version classique')
 
         # Variables
-        modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain = pe.NonNegativeReals, bounds = (0, 1))
-        modele.y = pe.Var(range(self.data.nb_clients), name = 'y', domain = pe.NonNegativeReals, bounds = (0, 1))
+        modele.x = pe.Var(range(self.data.nb_clients), range(self.data.nb_clients), name = 'x', domain = pe.NonNegativeReals, bounds = (0,1))
+        modele.y = pe.Var(range(self.data.nb_clients), name = 'y', domain = pe.NonNegativeReals, bounds = (0,1))
         modele.D = pe.Var(name = 'D', domain = pe.NonNegativeReals)
 
         # Fonction objectif
@@ -59,14 +59,19 @@ class VersionClassique(ModelesPCentre):
     def extraire_solution(self):        
         if self.status:
             self.solution.distance_max = self.obj
+            self.solution.variables['x'] = []
+            self.solution.variables['y'] = []
             for i in range(self.data.nb_clients):
-                entrepot_built = pe.value(self.modele.y[i]) # self.results.solution.variable[self.modele.y[i].getname()]['Value']
+                entrepot_built = round(pe.value(self.modele.y[i])) # self.results.solution.variable[self.modele.y[i].getname()]['Value']
                 self.solution.entrepots.append(int(entrepot_built))
 
             # if self.capacity: # Si on considère les contraintes de capacités 
             for i in range(self.data.nb_clients):
+                self.solution.variables['x'].append([])
+                self.solution.variables['y'].append(pe.value(self.modele.y[i]))
                 for j in range(self.data.nb_clients):
-                    assigned_to_i = pe.value(self.modele.x[i,j]) # self.results.solution.variable[self.modele.x[i, j].getname()]['Value']
+                    self.solution.variables['x'][i].append(pe.value(self.modele.x[i, j]))
+                    assigned_to_i = round(pe.value(self.modele.x[i,j])) # self.results.solution.variable[self.modele.x[i, j].getname()]['Value']
                     if assigned_to_i:
                         self.solution.assignations[j] = int(i)
             # else: # Si on considère pas les contraintes de capacités 

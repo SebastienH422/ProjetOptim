@@ -5,7 +5,7 @@ dossier_Solutions="Solutions"
 dossier_Experimentation="Experimentations"
 
 
-Noeuds=(50) # Ensemble des valeur possible de n
+Noeuds=(50 30 20 10 5) # Ensemble des valeur possible de n
 # Les valeurs de p pour chaque n
 P_5=(1 2 3) 
 P_10=(1 2 3)

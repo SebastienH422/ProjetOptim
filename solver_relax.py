@@ -68,7 +68,7 @@ def main():
     model.solution.ecrire_solution(path_solution)
 
     #__________________________ write results in dataBase file
-    with open(args.fichierResultat + name_instance, 'a') as f:
+    with open(args.fichierResultat, 'a') as f:
         f.write(f'{args.nbPoints} {args.nbAouvrir} {args.indiceInstance} {args.version} {args.avecCapacite} {model.erreur} {model.status} {model.etat} {model.temps_creation} {model.temps} {model.gap} {model.obj} {model.obj_upper} {model.obj_lower}\n')
 
 if __name__ == "__main__":

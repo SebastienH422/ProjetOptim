@@ -38,3 +38,6 @@ Trois programmes linéaires en nombres entiers ont été implémentés, et pour 
 - `i` **indice de l'instance** (voir les noms d'instances dans le dossier Instances)
 - `s` **chemin vers le dossier contenant les fichiers solutions** (ne pas modifier)
 - `m` **chemin vers le dossier contenant les fichiers modèles** (ne pas modifier)
+- 
+
+Avertissement: il peut être nécessaire de modifier les chemins à l'intérieur des fichiers. Tous les scripts python du dossier scripts étaient initialement dans le dossier racine.
